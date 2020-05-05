@@ -1,6 +1,6 @@
 
   //here n is size of array.
-    
+  //arr[] is sorted  
 int algo(int arr[], int n, int x) 
 { 
     int i = 1; 
