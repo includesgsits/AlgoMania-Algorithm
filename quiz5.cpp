@@ -1,38 +1,58 @@
 #include <bits/stdc++.h>
  
-using namespace std;  
+using namespace std;
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define ll long long
+#define pb push_back
+#define MOD 1000000007
+#define ull unsigned long long
+#define rep(j, n) for(int in = j;in<n;in++) 
+#define foj(z, n) for(int j = z;j<n;j++)
+#define FO(j, n) for(int i = j;i<=n;i++)
 
 int main()
 {
-	//length of b should be less than or equal to a
-	
-	string a, b;
-	cin>>a>>b;
-	
-	vector <int> ans;
-	
-	int x = b.size();  
-    int y = a.size();  
-  
-    vector <int> c(256, -1); 
-  
-    for (int i = 0; i < x; i++)  c[(int)b[i]] = i;  
-  
-    int d = 0; 
-    while(d <= (y - x))  {  
-        int j = x - 1;  
-        while(j >= 0 && b[j] == a[d + j])  j--;  
-        if (j < 0)  
-        {  
-            ans.push_back(d);  
-            if((d+x) < y) d += x - c[(int)a[d+x]];
-	    else d+=1;
-        }
-        else d += max(1, j - c[(int)a[d + j]]);  
-    }  
+    fastio;
     
-    for(auto i: ans) cout<<i<<" ";
+   	int t;
+   	cin>>t;
+   	while(t--) {
+		int n;
+		cin>>n;
+		
+		int a[n];
+		rep(0, n) cin>>a[in];
+		
+		int max = 0, min = INT_MAX;
+		
+		int c = 1;
+		
+		for(int i = 1;i<n;i++) {
+			if(a[i] - a[i-1] <= 2) {
+				c++;
+			}
+			else {
+				if(c > max) max = c; 
+				c = 1;
+			}
+		}
+		
+		if(a[1] - a[0] > 2) min = 1;
+		else if(a[8] - a[0] > 2) min = 1;
+		else {
+			
+			for(int i = 0;i<n-1;i++) {
+				c = 1;
+				while(a[i+1] - a[i] > 2) {
+					c++;
+				}
+				if(c < min) min = c;
+			}
+		}
+		
+		cout<<min<<" "<<max<<"\n";
+	}
+	
 
-    cout<<"\n";
 return 0; 
 }
